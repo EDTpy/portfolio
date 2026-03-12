@@ -9,10 +9,6 @@
       rel="stylesheet"
     />
     <style>
-      /* ═══════════════════════════════════════════════════════════
-   DARK MODE
-   Mood: Sleek · High-contrast · Tech-forward · Moody orange glow
-   ═══════════════════════════════════════════════════════════ */
       [data-theme="dark"] {
         --bg: #0b0b0b;
         --surface: #131313;
@@ -21,58 +17,44 @@
         --card-hover: #1a1a1a;
         --border: #222222;
         --border2: #2e2e2e;
-
         --accent: #f97316;
         --accent-h: #fb923c;
         --accent-dim: rgba(249, 115, 22, 0.11);
         --accent-glow: rgba(249, 115, 22, 0.2);
-
         --tx-head: #f2f2f2;
         --tx-body: #909090;
         --tx-muted: #484848;
         --tx-label: #606060;
-
         --nav-bg: rgba(11, 11, 11, 0.94);
         --nav-border: #1e1e1e;
-
         --stat-bg: #181818;
         --stat-border: #242424;
         --stat-num: #f2f2f2;
         --stat-lbl: #505050;
-
         --tag-o-bg: rgba(249, 115, 22, 0.1);
         --tag-o-tx: #f97316;
         --tag-o-bd: rgba(249, 115, 22, 0.2);
         --tag-g-bg: rgba(52, 211, 153, 0.08);
         --tag-g-tx: #34d399;
         --tag-g-bd: rgba(52, 211, 153, 0.18);
-
         --skill-bg: transparent;
         --skill-bd: #2e2e2e;
         --skill-tx: #666;
         --skill-bd-h: #f97316;
         --skill-tx-h: #fb923c;
-
         --glow-1: rgba(249, 115, 22, 0.07);
         --glow-2: rgba(249, 115, 22, 0.04);
         --grid-line: rgba(249, 115, 22, 0.033);
         --hero-stroke: rgba(255, 255, 255, 0.1);
-
         --toggle-bg: #1a1a1a;
         --toggle-bd: #2e2e2e;
-
         --section-alt: #131313;
         --foot-bg: #0b0b0b;
-
-        /* dark-specific decorative */
         --card-shadow: none;
         --section-shadow: none;
+        --img-placeholder: #1a1a1a;
       }
 
-      /* ═══════════════════════════════════════════════════════════
-   LIGHT MODE
-   Mood: Warm paper · Editorial · Airy · Sophisticated cream
-   ═══════════════════════════════════════════════════════════ */
       [data-theme="light"] {
         --bg: #faf6f1;
         --surface: #ffffff;
@@ -81,56 +63,45 @@
         --card-hover: #fdf9f5;
         --border: #e8e2d9;
         --border2: #d4cdc3;
-
         --accent: #d45f00;
         --accent-h: #f97316;
         --accent-dim: rgba(212, 95, 0, 0.08);
         --accent-glow: rgba(212, 95, 0, 0.15);
-
         --tx-head: #1c1410;
         --tx-body: #5a5048;
         --tx-muted: #b0a89e;
         --tx-label: #9a8f84;
-
         --nav-bg: rgba(255, 255, 255, 0.96);
         --nav-border: #e8e2d9;
-
         --stat-bg: #fdf9f5;
         --stat-border: #e8e2d9;
         --stat-num: #1c1410;
         --stat-lbl: #9a8f84;
-
         --tag-o-bg: #fff3eb;
         --tag-o-tx: #b04d00;
         --tag-o-bd: #f5c9a3;
         --tag-g-bg: #ecfdf5;
         --tag-g-tx: #065f46;
         --tag-g-bd: #a7f3d0;
-
         --skill-bg: #fdf9f5;
         --skill-bd: #e8e2d9;
         --skill-tx: #7a7068;
         --skill-bd-h: #d45f00;
         --skill-tx-h: #d45f00;
-
         --glow-1: rgba(212, 95, 0, 0.05);
         --glow-2: rgba(212, 95, 0, 0.03);
         --grid-line: rgba(212, 95, 0, 0.045);
         --hero-stroke: rgba(28, 20, 16, 0.12);
-
         --toggle-bg: #f2ede6;
         --toggle-bd: #d4cdc3;
-
         --section-alt: #ffffff;
         --foot-bg: #f2ede6;
-
-        /* light-specific decorative */
         --card-shadow:
           0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
         --section-shadow: inset 0 1px 0 #e8e2d9, inset 0 -1px 0 #e8e2d9;
+        --img-placeholder: #f2ede6;
       }
 
-      /* ═══ BASE ═══ */
       *,
       *::before,
       *::after {
@@ -147,35 +118,13 @@
         font-family: "DM Sans", sans-serif;
         font-weight: 300;
         overflow-x: hidden;
-        cursor: none;
+        cursor: default;
         transition:
           background 0.35s ease,
           color 0.35s ease;
       }
 
-      /* ═══ CURSOR ═══ */
-      .cursor {
-        width: 9px;
-        height: 9px;
-        border-radius: 50%;
-        background: var(--accent);
-        position: fixed;
-        pointer-events: none;
-        z-index: 9999;
-        transition: transform 0.14s ease;
-      }
-      .cursor-ring {
-        width: 34px;
-        height: 34px;
-        border-radius: 50%;
-        border: 1.5px solid var(--accent-glow);
-        position: fixed;
-        pointer-events: none;
-        z-index: 9998;
-        transition: all 0.18s ease;
-      }
-
-      /* ═══ NAV ═══ */
+      /* ── NAV ── */
       nav {
         position: fixed;
         top: 0;
@@ -200,7 +149,6 @@
         color: var(--tx-head);
         text-decoration: none;
         transition: color 0.2s;
-        letter-spacing: 0.01em;
       }
       .nav-logo:hover {
         color: var(--accent);
@@ -231,7 +179,6 @@
         color: var(--accent);
       }
 
-      /* Toggle */
       .theme-toggle {
         position: relative;
         width: 48px;
@@ -244,14 +191,13 @@
         transition:
           background 0.3s,
           border-color 0.3s;
-        display: flex;
-        align-items: center;
       }
       .t-icon {
         position: absolute;
         font-size: 11px;
-        line-height: 1;
         transition: opacity 0.3s;
+        top: 50%;
+        transform: translateY(-50%);
       }
       .t-moon {
         right: 6px;
@@ -269,6 +215,7 @@
       .t-knob {
         position: absolute;
         left: 5px;
+        top: 4px;
         width: 16px;
         height: 16px;
         border-radius: 50%;
@@ -298,7 +245,7 @@
         transform: translateY(-1px);
       }
 
-      /* ═══ HERO ═══ */
+      /* ── HERO ── */
       #hero {
         min-height: 100vh;
         display: flex;
@@ -339,8 +286,6 @@
         bottom: 80px;
         left: 5%;
       }
-
-      /* Light mode hero texture — paper feel */
       [data-theme="light"] #hero::after {
         content: "";
         position: absolute;
@@ -349,7 +294,6 @@
         background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.022'/%3E%3C/svg%3E");
         opacity: 0.5;
       }
-
       .hero-pip-row {
         display: flex;
         align-items: center;
@@ -440,7 +384,6 @@
         border: 1.5px solid var(--accent);
         text-decoration: none;
         transition: all 0.22s;
-        cursor: none;
         position: relative;
         overflow: hidden;
       }
@@ -472,7 +415,6 @@
         border: 1.5px solid var(--border2);
         text-decoration: none;
         transition: all 0.22s;
-        cursor: none;
       }
       .btn-outline:hover {
         border-color: var(--accent);
@@ -514,7 +456,7 @@
         vertical-align: middle;
       }
 
-      /* ═══ SECTIONS ═══ */
+      /* ── SECTIONS ── */
       section {
         padding: 9rem 5rem;
         transition: background 0.35s;
@@ -547,10 +489,7 @@
         margin-bottom: 0.8rem;
       }
 
-      /* ═══════════════════════════════════
-   ABOUT — DARK: stark bordered boxes
-             LIGHT: airy cards w/ shadow
-   ═══════════════════════════════════ */
+      /* ── ABOUT ── */
       #about {
         background: var(--surface);
         box-shadow: var(--section-shadow, none);
@@ -605,21 +544,17 @@
         color: var(--skill-tx-h);
         background: var(--accent-dim);
       }
-
-      /* Stats — dark: bordered slabs / light: paper cards with shadow */
       .stats-stack {
         display: flex;
         flex-direction: column;
         gap: 3px;
       }
-
       [data-theme="dark"] .stats-stack {
         gap: 2px;
       }
       [data-theme="light"] .stats-stack {
         gap: 12px;
       }
-
       .stat-box {
         background: var(--stat-bg);
         border: 1px solid var(--stat-border);
@@ -631,8 +566,6 @@
           box-shadow 0.28s;
         box-shadow: var(--card-shadow, none);
       }
-
-      /* dark: side-bar reveal on hover */
       [data-theme="dark"] .stat-box::after {
         content: "";
         position: absolute;
@@ -651,8 +584,6 @@
       [data-theme="dark"] .stat-box:hover::after {
         transform: scaleY(1);
       }
-
-      /* light: lift shadow on hover */
       [data-theme="light"] .stat-box {
         border-radius: 10px;
         box-shadow:
@@ -663,7 +594,6 @@
         transform: translateY(-3px);
         box-shadow: 0 6px 24px rgba(0, 0, 0, 0.09);
       }
-
       .stat-num {
         font-family: "Playfair Display", serif;
         font-size: 2.9rem;
@@ -685,14 +615,10 @@
         margin-top: 0.45rem;
       }
 
-      /* ═══════════════════════════════════
-   PROJECTS — DARK: grid w/ 1px gap borders
-              LIGHT: card grid w/ shadows
-   ═══════════════════════════════════ */
+      /* ── PROJECTS ── */
       #projects {
         background: var(--bg);
       }
-
       [data-theme="dark"] .proj-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
@@ -706,7 +632,6 @@
         gap: 22px;
         margin-top: 4rem;
       }
-
       .pcard {
         background: var(--card);
         display: flex;
@@ -721,7 +646,6 @@
       [data-theme="dark"] .pcard:hover {
         background: var(--card-hover);
       }
-
       [data-theme="light"] .pcard {
         border-radius: 12px;
         border: 1px solid var(--border);
@@ -733,8 +657,6 @@
         transform: translateY(-4px);
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.11);
       }
-
-      /* dark: top stripe sweep */
       .pcard-stripe {
         height: 2.5px;
         background: linear-gradient(90deg, #c25500, var(--accent), #ffb347);
@@ -748,8 +670,6 @@
       [data-theme="light"] .pcard-stripe {
         display: none;
       }
-
-      /* light: left accent border on hover */
       [data-theme="light"] .pcard::before {
         content: "";
         position: absolute;
@@ -767,12 +687,12 @@
         transform: scaleY(1);
       }
 
-      /* ─ Gallery ─ */
+      /* ── GALLERY (static images) ── */
       .gallery {
         position: relative;
         width: 100%;
         height: 215px;
-        background: var(--surface2);
+        background: var(--img-placeholder);
         overflow: hidden;
         flex-shrink: 0;
       }
@@ -787,9 +707,6 @@
       .gslide {
         min-width: 100%;
         height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         flex-shrink: 0;
       }
       .gslide img {
@@ -798,7 +715,9 @@
         object-fit: cover;
         display: block;
       }
-      .gempty {
+
+      /* placeholder when no image */
+      .gplaceholder {
         width: 100%;
         height: 100%;
         display: flex;
@@ -806,29 +725,22 @@
         align-items: center;
         justify-content: center;
         gap: 0.75rem;
-        cursor: pointer;
-        border: 2px dashed var(--border2);
-        transition:
-          border-color 0.22s,
-          background 0.22s;
       }
-      .gempty:hover {
-        border-color: var(--accent);
-        background: var(--accent-dim);
-      }
-      .gempty svg {
-        opacity: 0.22;
-        width: 28px;
-        height: 28px;
+      .gplaceholder svg {
+        opacity: 0.15;
+        width: 32px;
+        height: 32px;
         color: var(--accent);
       }
-      .gempty-txt {
+      .gplaceholder-txt {
         font-family: "DM Mono", monospace;
         font-size: 0.6rem;
         letter-spacing: 0.16em;
         text-transform: uppercase;
         color: var(--tx-muted);
       }
+
+      /* arrows */
       .garrow {
         position: absolute;
         top: 50%;
@@ -856,7 +768,6 @@
       }
       .garrow:hover {
         background: var(--accent) !important;
-        border-color: var(--accent) !important;
       }
       .gprev {
         left: 8px;
@@ -887,36 +798,6 @@
         background: var(--accent);
         transform: scale(1.45);
       }
-      .gadd {
-        position: absolute;
-        bottom: 9px;
-        right: 9px;
-        font-family: "DM Mono", monospace;
-        font-size: 0.58rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        padding: 0.28rem 0.75rem;
-        border-radius: 999px;
-        background: rgba(0, 0, 0, 0.68);
-        border: 1px solid var(--accent);
-        color: var(--accent);
-        cursor: pointer;
-        z-index: 10;
-        display: flex;
-        align-items: center;
-        gap: 0.35rem;
-        opacity: 0;
-        transition:
-          opacity 0.2s,
-          background 0.2s;
-      }
-      .gallery:hover .gadd {
-        opacity: 1;
-      }
-      .gadd:hover {
-        background: var(--accent);
-        color: #fff;
-      }
       .gcnt {
         position: absolute;
         top: 9px;
@@ -929,13 +810,9 @@
         background: rgba(0, 0, 0, 0.62);
         color: rgba(255, 255, 255, 0.8);
         z-index: 10;
-        display: none;
-      }
-      .gfile {
-        display: none;
       }
 
-      /* ─ Card body ─ */
+      /* card body */
       .pcard-body {
         padding: 1.8rem 2rem 2rem;
         flex: 1;
@@ -1019,18 +896,13 @@
         animation: pip 1.6s infinite;
       }
 
-      /* ═══════════════════════════════════
-   CONTACT — DARK: dark surface
-             LIGHT: warm white, centred
-   ═══════════════════════════════════ */
+      /* ── CONTACT ── */
       #contact {
         background: var(--surface);
       }
       [data-theme="light"] #contact {
-        background: var(--surface);
         box-shadow: var(--section-shadow, none);
       }
-
       .contact-wrap {
         max-width: 640px;
         margin: 0 auto;
@@ -1089,7 +961,7 @@
         border-color: var(--accent);
       }
 
-      /* ═══ FOOTER ═══ */
+      /* ── FOOTER ── */
       footer {
         padding: 2rem 5rem;
         border-top: 1px solid var(--border);
@@ -1120,7 +992,7 @@
         background: var(--tag-o-bg);
       }
 
-      /* ═══ ANIMATIONS ═══ */
+      /* ── ANIMATIONS ── */
       @keyframes fadeUp {
         from {
           opacity: 0;
@@ -1140,7 +1012,6 @@
           opacity: 0.35;
         }
       }
-
       .reveal {
         opacity: 0;
         transform: translateY(26px);
@@ -1162,7 +1033,6 @@
         transition-delay: 0.3s;
       }
 
-      /* ═══ RESPONSIVE ═══ */
       @media (max-width: 860px) {
         nav {
           padding: 1.1rem 1.6rem;
@@ -1193,17 +1063,14 @@
     </style>
   </head>
   <body>
-    <div class="cursor" id="cursor"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
-
     <!-- NAV -->
     <nav>
       <a href="#hero" class="nav-logo">Taiwo<span>.</span></a>
       <div class="nav-right">
         <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#about" class="btn-fill">About</a></li>
+          <li><a href="#projects" class="btn-outline">Projects</a></li>
+          <li><a href="#contact" class="btn-fill">Contact</a></li>
         </ul>
         <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
           <div class="t-knob"></div>
@@ -1230,8 +1097,7 @@
         >
       </div>
       <h1 class="hero-name">
-        Ogunkanmi<br />
-        <span class="ghost">Taiwo <span class="o">—</span></span>
+        Ogunkanmi<br /><span class="ghost">Taiwo <span class="o">—</span></span>
       </h1>
       <div class="hero-sub">
         <div class="hero-rule"></div>
@@ -1240,9 +1106,9 @@
         </p>
       </div>
       <p class="hero-desc">
-        I build systems that solve real-world problems — from enterprise ERPs
-        and transit schedulers to AI-powered prediction engines. Clean code.
-        Sharp thinking. Ready to ship.
+        I build systems that solve real problems — from enterprise ERPs and
+        transit schedulers to AI-powered prediction engines. Clean code. Sharp
+        thinking. Ready to ship.
       </p>
       <div class="hero-cta">
         <a href="#projects" class="btn-fill">View My Work</a>
@@ -1291,22 +1157,22 @@
           <div class="skills-wrap">
             <div class="sk-lbl">Languages</div>
             <div class="sk-row">
-              <span class="sk">Java</span><span class="sk">JavaScript</span>
-              <span class="sk">Python</span><span class="sk">TypeScript</span
+              <span class="sk">Java</span><span class="sk">JavaScript</span
+              ><span class="sk">Python</span><span class="sk">TypeScript</span
               ><span class="sk">SQL</span>
             </div>
             <div class="sk-lbl" style="margin-top: 1rem">
               Frameworks &amp; Tools
             </div>
             <div class="sk-row">
-              <span class="sk">Node.js</span><span class="sk">React</span>
-              <span class="sk">Spring Boot</span
-              ><span class="sk">REST APIs</span> <span class="sk">MySQL</span
+              <span class="sk">Node.js</span><span class="sk">React</span
+              ><span class="sk">Spring Boot</span
+              ><span class="sk">REST APIs</span><span class="sk">MySQL</span
               ><span class="sk">Git</span>
             </div>
-            <div class="sk-lbl">Databases</div>
+            <div class="sk-lbl" style="margin-top: 1rem">DataBases</div>
             <div class="sk-row">
-              <span class="sk">MySQL</span><span class="sk">PostgreSQL</span>
+              <span class="sk">PostgreSQL</span><span class="sk">MySQL</span>
             </div>
           </div>
         </div>
@@ -1343,31 +1209,10 @@
           <div class="pcard-stripe"></div>
           <div class="gallery" id="g0">
             <div class="gslides" id="sl0"></div>
-            <div class="garrow gprev" onclick="prevSlide(0)">&#8249;</div>
-            <div class="garrow gnext" onclick="nextSlide(0)">&#8250;</div>
+            <div class="garrow gprev" onclick="prev(0)">&#8249;</div>
+            <div class="garrow gnext" onclick="next(0)">&#8250;</div>
             <div class="gdots" id="dt0"></div>
             <div class="gcnt" id="cn0"></div>
-            <div class="gadd" onclick="document.getElementById('fi0').click()">
-              <svg
-                width="10"
-                height="10"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 5v14M5 12h14" />
-              </svg>
-              >Add Photos
-            </div>
-            <input
-              type="file"
-              accept="image/*"
-              multiple
-              class="gfile"
-              id="fi0"
-              onchange="addImages(0, this)"
-            />
           </div>
           <div class="pcard-body">
             <div class="pcard-num">Project — 01</div>
@@ -1394,39 +1239,19 @@
           <div class="pcard-stripe"></div>
           <div class="gallery" id="g1">
             <div class="gslides" id="sl1"></div>
-            <div class="garrow gprev" onclick="prevSlide(1)">&#8249;</div>
-            <div class="garrow gnext" onclick="nextSlide(1)">&#8250;</div>
+            <div class="garrow gprev" onclick="prev(1)">&#8249;</div>
+            <div class="garrow gnext" onclick="next(1)">&#8250;</div>
             <div class="gdots" id="dt1"></div>
             <div class="gcnt" id="cn1"></div>
-            <div class="gadd" onclick="document.getElementById('fi1').click()">
-              <svg
-                width="10"
-                height="10"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 5v14M5 12h14" />
-              </svg>
-              >Add Photos
-            </div>
-            <input
-              type="file"
-              accept="image/*"
-              multiple
-              class="gfile"
-              id="fi1"
-              onchange="addImages(1, this)"
-            />
           </div>
           <div class="pcard-body">
             <div class="pcard-num">Project — 02</div>
             <div class="pcard-title">EDT Bet Prediction &amp; Analysis App</div>
             <p class="pcard-desc">
               An intelligent sports betting prediction platform. Uses data
-              analytics, ML, XGBoost, Poission and statistical modelling to
-              generate insights and support smarter betting predictions.
+              analytics, ML, XGBoost, Poisson regression, and statistical
+              modelling to generate insights and support smarter betting
+              decisions.
             </p>
             <div class="ptags">
               <span class="ptag">Data Analytics</span
@@ -1446,37 +1271,16 @@
           <div class="pcard-stripe"></div>
           <div class="gallery" id="g2">
             <div class="gslides" id="sl2"></div>
-            <div class="garrow gprev" onclick="prevSlide(2)">&#8249;</div>
-            <div class="garrow gnext" onclick="nextSlide(2)">&#8250;</div>
+            <div class="garrow gprev" onclick="prev(2)">&#8249;</div>
+            <div class="garrow gnext" onclick="next(2)">&#8250;</div>
             <div class="gdots" id="dt2"></div>
             <div class="gcnt" id="cn2"></div>
-            <div class="gadd" onclick="document.getElementById('fi2').click()">
-              <svg
-                width="10"
-                height="10"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 5v14M5 12h14" />
-              </svg>
-              >Add Photos
-            </div>
-            <input
-              type="file"
-              accept="image/*"
-              multiple
-              class="gfile"
-              id="fi2"
-              onchange="addImages(2, this)"
-            />
           </div>
           <div class="pcard-body">
             <div class="pcard-num">Project — 03</div>
             <div class="pcard-title">Danfo Bus Scheduling System</div>
             <p class="pcard-desc">
-              A transit management system built for Lagos public transport
+              A transit management system built for Nigeria's public transport
               ecosystem. Handles route planning, bus scheduling, and real-time
               allocation for efficient city mobility.
             </p>
@@ -1498,31 +1302,10 @@
           <div class="pcard-stripe"></div>
           <div class="gallery" id="g3">
             <div class="gslides" id="sl3"></div>
-            <div class="garrow gprev" onclick="prevSlide(3)">&#8249;</div>
-            <div class="garrow gnext" onclick="nextSlide(3)">&#8250;</div>
+            <div class="garrow gprev" onclick="prev(3)">&#8249;</div>
+            <div class="garrow gnext" onclick="next(3)">&#8250;</div>
             <div class="gdots" id="dt3"></div>
             <div class="gcnt" id="cn3"></div>
-            <div class="gadd" onclick="document.getElementById('fi3').click()">
-              <svg
-                width="10"
-                height="10"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                viewBox="0 0 24 24"
-              >
-                <path d="M12 5v14M5 12h14" />
-              </svg>
-              >Add Photos
-            </div>
-            <input
-              type="file"
-              accept="image/*"
-              multiple
-              class="gfile"
-              id="fi3"
-              onchange="addImages(3, this)"
-            />
           </div>
           <div class="pcard-body">
             <div class="pcard-num">Project — 04</div>
@@ -1555,11 +1338,11 @@
           <div class="s-rule"></div>
         </div>
         <h2 class="s-title reveal" style="text-align: center">
-          Let's build<br />something great.
+          Let's build<br />something great together.
         </h2>
         <p class="reveal d1">
-          I'm actively looking for opportunities — full-time roles,Internship
-          opportunities, and gigs, or exciting collaborations. If you're
+          I'm actively looking for opportunities — full-time roles, internship
+          opportunities, freelance, gigs, or exciting collaborations. If you're
           building something meaningful, I want to hear about it.
         </p>
         <div class="contact-email-block reveal d2">
@@ -1571,24 +1354,18 @@
           <a href="mailto:damilareogunkanmi19@gmail.com" class="btn-fill"
             >Send a Message</a
           >
-          <a
-            href="C:\Users\user\Desktop\My-portfolio\OGUNKANMI_TAIWO_CV.pdf"
-            class="btn-outline"
+          <a href="./OGUNKANMI_TAIWO_CV.pdf" download class="btn-outline"
             >Download CV</a
           >
         </div>
         <div class="slinks reveal d3">
           <a href="https://github.com/EDTpy" class="slink">GitHub</a>
+          <a href="./contact icon.png" class="slink">09016104193</a>
           <a href="#" class="slink">LinkedIn</a>
           <a
             href="https://x.com/damee1904?s=21&t=BKcqLasgMTwp3JqorSMTJw"
             class="slink"
             >Twitter</a
-          >
-          <a
-            href="C:\Users\user\Desktop\My-portfolio\contact icon.png"
-            class="slink"
-            >09016104193</a
           >
         </div>
       </div>
@@ -1602,40 +1379,7 @@
     </footer>
 
     <script>
-      /* CURSOR */
-      const C = document.getElementById("cursor"),
-        R = document.getElementById("cursorRing");
-      let mx = 0,
-        my = 0,
-        rx = 0,
-        ry = 0;
-      document.addEventListener("mousemove", (e) => {
-        mx = e.clientX;
-        my = e.clientY;
-        C.style.left = mx - 4.5 + "px";
-        C.style.top = my - 4.5 + "px";
-      });
-      (function a() {
-        rx += (mx - rx - 17) * 0.13;
-        ry += (my - ry - 17) * 0.13;
-        R.style.left = rx + "px";
-        R.style.top = ry + "px";
-        requestAnimationFrame(a);
-      })();
-      document
-        .querySelectorAll("a,button,.gallery,.theme-toggle")
-        .forEach((el) => {
-          el.addEventListener("mouseenter", () => {
-            C.style.transform = "scale(2.4)";
-            R.style.opacity = "0.5";
-          });
-          el.addEventListener("mouseleave", () => {
-            C.style.transform = "scale(1)";
-            R.style.opacity = "1";
-          });
-        });
-
-      /* THEME */
+      /* ── THEME ── */
       function toggleTheme() {
         const h = document.documentElement;
         const n = h.getAttribute("data-theme") === "dark" ? "light" : "dark";
@@ -1649,7 +1393,7 @@
         if (s) document.documentElement.setAttribute("data-theme", s);
       } catch (e) {}
 
-      /* REVEAL */
+      /* ── SCROLL REVEAL ── */
       const obs = new IntersectionObserver(
         (es) => {
           es.forEach((e) => {
@@ -1663,75 +1407,106 @@
       );
       document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
 
-      /* GALLERY */
+      /* ══════════════════════════════════════════
+   GALLERY — add your images here
+   
+   FORMAT:
+   projectImages[PROJECT_NUMBER] = [
+     './images/FOLDER/filename.jpg',
+     './images/FOLDER/filename2.jpg',
+     ... add as many as you want
+   ]
+   
+  
+   ══════════════════════════════════════════ */
+      const projectImages = {
+        0: [
+          // './images/erp/screenshot1.png',
+          // './images/erp/screenshot2.png',
+        ],
+        1: [
+          // './images/edt/screenshot1.png',
+          // './images/edt/screenshot2.png',
+        ],
+        2: [
+          "./images/danfo/./554shots_so.png",
+          "./images/danfo/./657shots_so.png",
+          "./images/danfo/./244shots_so.png",
+          "./images/danfo/./136shots_so.png.png",
+          "./images/danfo/./713shots_so.png",
+          "./images/danfo/./661shots_so.png",
+        ],
+        3: [
+          // './images/cgpa/screenshot1.png',
+          // './images/cgpa/screenshot2.png',
+        ],
+      };
+
+      /* ── Gallery engine ── */
       const G = {};
+
       function initG(id) {
-        if (G[id]) return;
-        G[id] = { imgs: [], cur: 0 };
+        G[id] = { imgs: projectImages[id] || [], cur: 0 };
         renderG(id);
       }
+
       function renderG(id) {
         const g = G[id];
-        const sl = document.getElementById("sl" + id),
-          dt = document.getElementById("dt" + id),
-          cn = document.getElementById("cn" + id);
+        const sl = document.getElementById("sl" + id);
+        const dt = document.getElementById("dt" + id);
+        const cn = document.getElementById("cn" + id);
+
         if (!g.imgs.length) {
-          sl.innerHTML = `<div class="gslide"><div class="gempty" onclick="document.getElementById('fi${id}').click()"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" width="28" height="28"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg><span class="gempty-txt">Click to add screenshots</span></div></div>`;
+          sl.innerHTML = `
+      <div class="gslide">
+        <div class="gplaceholder">
+          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v13.5A1.5 1.5 0 003.75 21z"/>
+          </svg>
+          <span class="gplaceholder-txt">Screenshots coming soon</span>
+        </div>
+      </div>`;
           dt.innerHTML = "";
           cn.style.display = "none";
           return;
         }
+
         sl.innerHTML = g.imgs
           .map(
-            (s, i) =>
-              `<div class="gslide"><img src="${s}" alt="screenshot ${i + 1}"/></div>`,
+            (src, i) =>
+              `<div class="gslide"><img src="${src}" alt="Project screenshot ${i + 1}" loading="lazy"/></div>`,
           )
           .join("");
         sl.style.transform = `translateX(-${g.cur * 100}%)`;
         dt.innerHTML = g.imgs
           .map(
             (_, i) =>
-              `<div class="gdot${i === g.cur ? " on" : ""}" onclick="goSlide(${id},${i})"></div>`,
+              `<div class="gdot${i === g.cur ? " on" : ""}" onclick="goTo(${id},${i})"></div>`,
           )
           .join("");
         cn.textContent = `${g.cur + 1} / ${g.imgs.length}`;
-        cn.style.display = "block";
+        cn.style.display = g.imgs.length > 1 ? "block" : "none";
       }
-      function addImages(id, inp) {
-        if (!inp.files || !inp.files.length) return;
-        const g = G[id];
-        const start = g.imgs.length;
-        let done = 0;
-        Array.from(inp.files).forEach((f) => {
-          const r = new FileReader();
-          r.onload = (e) => {
-            g.imgs.push(e.target.result);
-            if (++done === inp.files.length) {
-              g.cur = start;
-              renderG(id);
-            }
-          };
-          r.readAsDataURL(f);
-        });
-        inp.value = "";
-      }
-      function goSlide(id, i) {
+
+      function goTo(id, i) {
         const g = G[id];
         g.cur = Math.max(0, Math.min(i, g.imgs.length - 1));
         renderG(id);
       }
-      function nextSlide(id) {
+      function next(id) {
         const g = G[id];
         if (!g || !g.imgs.length) return;
         g.cur = (g.cur + 1) % g.imgs.length;
         renderG(id);
       }
-      function prevSlide(id) {
+      function prev(id) {
         const g = G[id];
         if (!g || !g.imgs.length) return;
         g.cur = (g.cur - 1 + g.imgs.length) % g.imgs.length;
         renderG(id);
       }
+
       [0, 1, 2, 3].forEach((i) => initG(i));
     </script>
   </body>
