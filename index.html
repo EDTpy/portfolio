@@ -178,7 +178,6 @@
       .nav-links a:hover {
         color: var(--accent);
       }
-
       .theme-toggle {
         position: relative;
         width: 48px;
@@ -225,7 +224,6 @@
       [data-theme="light"] .t-knob {
         transform: translateX(22px);
       }
-
       .nav-hire {
         font-family: "DM Mono", monospace;
         font-size: 0.68rem;
@@ -245,13 +243,14 @@
         transform: translateY(-1px);
       }
 
-      /* ── HERO ── */
+      /* ── HERO — iOS Safari fix ── */
       #hero {
         min-height: 100vh;
+        min-height: 100svh;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        padding: 9rem 5rem 5rem;
+        padding: 7rem 5rem 5rem;
         position: relative;
         overflow: hidden;
       }
@@ -691,7 +690,7 @@
       .gallery {
         position: relative;
         width: 100%;
-        height: clamp(200px, 28vw, 420px);
+        aspect-ratio: 16/9;
         background: var(--img-placeholder);
         overflow: hidden;
         flex-shrink: 0;
@@ -708,19 +707,15 @@
         min-width: 100%;
         height: 100%;
         flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: var(--img-placeholder);
       }
       .gslide img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
         display: block;
       }
 
-      /* placeholder when no image */
+      /* placeholder */
       .gplaceholder {
         width: 100%;
         height: 100%;
@@ -749,11 +744,11 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        width: 30px;
-        height: 30px;
+        width: 34px;
+        height: 34px;
         border-radius: 50%;
-        background: rgba(0, 0, 0, 0.55);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.15);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -764,7 +759,7 @@
           opacity 0.2s,
           background 0.2s;
         color: #fff;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         user-select: none;
       }
       .gallery:hover .garrow {
@@ -774,14 +769,14 @@
         background: var(--accent) !important;
       }
       .gprev {
-        left: 8px;
+        left: 10px;
       }
       .gnext {
-        right: 8px;
+        right: 10px;
       }
       .gdots {
         position: absolute;
-        bottom: 9px;
+        bottom: 10px;
         left: 50%;
         transform: translateX(-50%);
         display: flex;
@@ -789,10 +784,10 @@
         z-index: 10;
       }
       .gdot {
-        width: 5px;
-        height: 5px;
+        width: 6px;
+        height: 6px;
         border-radius: 50%;
-        background: rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.35);
         cursor: pointer;
         transition:
           background 0.2s,
@@ -812,8 +807,32 @@
         padding: 0.22rem 0.6rem;
         border-radius: 4px;
         background: rgba(0, 0, 0, 0.62);
-        color: rgba(255, 255, 255, 0.8);
+        color: rgba(255, 255, 255, 0.85);
         z-index: 10;
+      }
+
+      /* View All button */
+      .gview-all {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        z-index: 10;
+        font-family: "DM Mono", monospace;
+        font-size: 0.58rem;
+        letter-spacing: 0.08em;
+        padding: 0.3rem 0.8rem;
+        border-radius: 4px;
+        background: rgba(0, 0, 0, 0.65);
+        color: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          border-color 0.2s;
+      }
+      .gview-all:hover {
+        background: var(--accent);
+        border-color: var(--accent);
       }
 
       /* card body */
@@ -898,6 +917,246 @@
         background: var(--accent);
         box-shadow: 0 0 7px var(--accent-glow);
         animation: pip 1.6s infinite;
+      }
+
+      /* ── LIGHTBOX — scrollable strip ── */
+      .lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.97);
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: space-between;
+      }
+      .lightbox.open {
+        display: flex;
+      }
+      .lb-header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.2rem 2rem;
+        flex-shrink: 0;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      }
+      .lb-title {
+        font-family: "Playfair Display", serif;
+        font-size: 1rem;
+        color: #f2f2f2;
+      }
+      .lb-title span {
+        color: var(--accent);
+        font-style: italic;
+      }
+      .lb-close {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #fff;
+        font-size: 1.1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+      .lb-close:hover {
+        background: var(--accent);
+      }
+      .lb-strip-wrap {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.5rem 4rem;
+        overflow: hidden;
+        position: relative;
+      }
+      .lb-strip {
+        display: flex;
+        gap: 16px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+        padding: 0.5rem 0.5rem;
+        width: 100%;
+        align-items: center;
+        scrollbar-width: thin;
+        scrollbar-color: var(--accent) rgba(255, 255, 255, 0.05);
+      }
+      .lb-strip::-webkit-scrollbar {
+        height: 4px;
+      }
+      .lb-strip::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 2px;
+      }
+      .lb-strip::-webkit-scrollbar-thumb {
+        background: var(--accent);
+        border-radius: 2px;
+      }
+      .lb-strip-item {
+        flex-shrink: 0;
+        scroll-snap-align: center;
+        height: clamp(180px, 52vh, 500px);
+        aspect-ratio: 16/9;
+        border-radius: 10px;
+        overflow: hidden;
+        cursor: zoom-in;
+        border: 2px solid rgba(255, 255, 255, 0.06);
+        transition:
+          border-color 0.22s,
+          transform 0.22s;
+        position: relative;
+      }
+      .lb-strip-item:hover {
+        border-color: var(--accent);
+        transform: scale(1.02);
+      }
+      .lb-strip-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .lb-strip-num {
+        position: absolute;
+        bottom: 8px;
+        right: 10px;
+        font-family: "DM Mono", monospace;
+        font-size: 0.58rem;
+        letter-spacing: 0.1em;
+        color: rgba(255, 255, 255, 0.65);
+        background: rgba(0, 0, 0, 0.6);
+        padding: 0.2rem 0.55rem;
+        border-radius: 4px;
+      }
+      .lb-strip-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #fff;
+        font-size: 1.3rem;
+        cursor: pointer;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+      .lb-strip-nav:hover {
+        background: var(--accent);
+      }
+      .lb-strip-left {
+        left: 8px;
+      }
+      .lb-strip-right {
+        right: 8px;
+      }
+      .lb-counter-bar {
+        flex-shrink: 0;
+        text-align: center;
+        padding: 0.8rem;
+        font-family: "DM Mono", monospace;
+        font-size: 0.62rem;
+        letter-spacing: 0.14em;
+        color: rgba(255, 255, 255, 0.3);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .lb-counter-bar span {
+        color: var(--accent);
+      }
+
+      /* fullscreen zoom */
+      .lb-zoom {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 2000;
+        background: rgba(0, 0, 0, 0.98);
+        align-items: center;
+        justify-content: center;
+      }
+      .lb-zoom.open {
+        display: flex;
+      }
+      .lb-zoom img {
+        max-width: 95vw;
+        max-height: 92vh;
+        object-fit: contain;
+        border-radius: 4px;
+      }
+      .lb-zoom-close {
+        position: absolute;
+        top: 1.2rem;
+        right: 1.4rem;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+      .lb-zoom-close:hover {
+        background: var(--accent);
+      }
+      .lb-zoom-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(0, 0, 0, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #fff;
+        font-size: 1.4rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+      .lb-zoom-nav:hover {
+        background: var(--accent);
+      }
+      .lb-zoom-prev {
+        left: 1.2rem;
+      }
+      .lb-zoom-next {
+        right: 1.2rem;
+      }
+      .lb-zoom-counter {
+        position: absolute;
+        bottom: 1.2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: "DM Mono", monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.12em;
+        color: rgba(255, 255, 255, 0.5);
+        background: rgba(0, 0, 0, 0.5);
+        padding: 0.3rem 0.9rem;
+        border-radius: 20px;
       }
 
       /* ── CONTACT ── */
@@ -1048,7 +1307,7 @@
           padding: 6rem 1.6rem;
         }
         #hero {
-          padding: 8rem 1.6rem 4rem;
+          padding: 6rem 1.6rem 3rem;
         }
         .about-grid {
           grid-template-columns: 1fr;
@@ -1063,8 +1322,18 @@
           text-align: center;
           padding: 1.6rem;
         }
-        .gallery {
-          height: clamp(180px, 55vw, 320px);
+        .lb-grid {
+          grid-template-columns: 1fr 1fr;
+          padding: 1rem;
+          gap: 8px;
+        }
+        .lb-zoom-nav {
+          display: none;
+        }
+      }
+      @media (max-width: 480px) {
+        .lb-grid {
+          grid-template-columns: 1fr;
         }
       }
     </style>
@@ -1220,6 +1489,14 @@
             <div class="garrow gnext" onclick="next(0)">&#8250;</div>
             <div class="gdots" id="dt0"></div>
             <div class="gcnt" id="cn0"></div>
+            <div
+              class="gview-all"
+              id="va0"
+              onclick="openLightbox(0)"
+              style="display: none"
+            >
+              View All
+            </div>
           </div>
           <div class="pcard-body">
             <div class="pcard-num">Project — 01</div>
@@ -1250,6 +1527,14 @@
             <div class="garrow gnext" onclick="next(1)">&#8250;</div>
             <div class="gdots" id="dt1"></div>
             <div class="gcnt" id="cn1"></div>
+            <div
+              class="gview-all"
+              id="va1"
+              onclick="openLightbox(1)"
+              style="display: none"
+            >
+              View All
+            </div>
           </div>
           <div class="pcard-body">
             <div class="pcard-num">Project — 02</div>
@@ -1282,6 +1567,14 @@
             <div class="garrow gnext" onclick="next(2)">&#8250;</div>
             <div class="gdots" id="dt2"></div>
             <div class="gcnt" id="cn2"></div>
+            <div
+              class="gview-all"
+              id="va2"
+              onclick="openLightbox(2)"
+              style="display: none"
+            >
+              View All
+            </div>
           </div>
           <div class="pcard-body">
             <div class="pcard-num">Project — 03</div>
@@ -1313,6 +1606,14 @@
             <div class="garrow gnext" onclick="next(3)">&#8250;</div>
             <div class="gdots" id="dt3"></div>
             <div class="gcnt" id="cn3"></div>
+            <div
+              class="gview-all"
+              id="va3"
+              onclick="openLightbox(3)"
+              style="display: none"
+            >
+              View All
+            </div>
           </div>
           <div class="pcard-body">
             <div class="pcard-num">Project — 04</div>
@@ -1385,6 +1686,39 @@
       <span class="ft">© 2026 Ogunkanmi Taiwo</span>
     </footer>
 
+    <!-- LIGHTBOX — scrollable strip -->
+    <div class="lightbox" id="lightbox">
+      <div class="lb-header">
+        <div class="lb-title" id="lb-title">Project Screenshots</div>
+        <button class="lb-close" onclick="closeLightbox()">✕</button>
+      </div>
+      <div class="lb-strip-wrap">
+        <button class="lb-strip-nav lb-strip-left" onclick="stripScroll(-1)">
+          &#8249;
+        </button>
+        <div class="lb-strip" id="lb-strip"></div>
+        <button class="lb-strip-nav lb-strip-right" onclick="stripScroll(1)">
+          &#8250;
+        </button>
+      </div>
+      <div class="lb-counter-bar" id="lb-counter-bar">
+        Scroll or swipe to browse &nbsp;·&nbsp; Click any image to zoom
+      </div>
+    </div>
+
+    <!-- ZOOM -->
+    <div class="lb-zoom" id="lb-zoom">
+      <button class="lb-zoom-close" onclick="closeZoom()">✕</button>
+      <button class="lb-zoom-nav lb-zoom-prev" onclick="zoomNav(-1)">
+        &#8249;
+      </button>
+      <img id="lb-zoom-img" src="" alt="Screenshot" />
+      <button class="lb-zoom-nav lb-zoom-next" onclick="zoomNav(1)">
+        &#8250;
+      </button>
+      <div class="lb-zoom-counter" id="lb-zoom-counter"></div>
+    </div>
+
     <script>
       /* ── THEME ── */
       function toggleTheme() {
@@ -1410,10 +1744,17 @@
             }
           });
         },
-        { threshold: 0.1 },
+        { threshold: 0.08 },
       );
       document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
 
+      /* ══════════════════════════════════════════
+         GALLERY — ADD YOUR IMAGES HERE
+         Project 0 = RS-Abimbola ERP
+         Project 1 = EDT Bet Prediction
+         Project 2 = Danfo Bus Scheduling
+         Project 3 = CGPA Calculator
+      ══════════════════════════════════════════ */
       const projectImages = {
         0: [
           // './Images/erp/screenshot1.png',
@@ -1437,12 +1778,32 @@
         ],
       };
 
+      const projectTitles = {
+        0: "RS-Abimbola ERP System",
+        1: "EDT Bet Prediction App",
+        2: "Danfo Bus Scheduling System",
+        3: "CGPA Calculator",
+      };
+
       /* ── Gallery engine ── */
       const G = {};
+      const timers = {};
 
       function initG(id) {
         G[id] = { imgs: projectImages[id] || [], cur: 0 };
         renderG(id);
+        if (G[id].imgs.length > 1) startTimer(id);
+      }
+
+      function startTimer(id) {
+        clearInterval(timers[id]);
+        timers[id] = setInterval(() => {
+          next(id, true);
+        }, 5000);
+      }
+
+      function resetTimer(id) {
+        if (G[id] && G[id].imgs.length > 1) startTimer(id);
       }
 
       function renderG(id) {
@@ -1450,27 +1811,28 @@
         const sl = document.getElementById("sl" + id);
         const dt = document.getElementById("dt" + id);
         const cn = document.getElementById("cn" + id);
+        const va = document.getElementById("va" + id);
 
         if (!g.imgs.length) {
           sl.innerHTML = `
-      <div class="gslide">
-        <div class="gplaceholder">
-          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v13.5A1.5 1.5 0 003.75 21z"/>
-          </svg>
-          <span class="gplaceholder-txt">Screenshots coming soon</span>
-        </div>
-      </div>`;
+            <div class="gslide">
+              <div class="gplaceholder">
+                <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v13.5A1.5 1.5 0 003.75 21z"/>
+                </svg>
+                <span class="gplaceholder-txt">Screenshots coming soon</span>
+              </div>
+            </div>`;
           dt.innerHTML = "";
           cn.style.display = "none";
+          va.style.display = "none";
           return;
         }
 
         sl.innerHTML = g.imgs
           .map(
             (src, i) =>
-              `<div class="gslide"><img src="${src}" alt="Project screenshot ${i + 1}" loading="lazy"/></div>`,
+              `<div class="gslide"><img src="${src}" alt="Screenshot ${i + 1}" loading="lazy"/></div>`,
           )
           .join("");
         sl.style.transform = `translateX(-${g.cur * 100}%)`;
@@ -1482,27 +1844,133 @@
           .join("");
         cn.textContent = `${g.cur + 1} / ${g.imgs.length}`;
         cn.style.display = g.imgs.length > 1 ? "block" : "none";
+        va.style.display = "block";
       }
 
       function goTo(id, i) {
         const g = G[id];
         g.cur = Math.max(0, Math.min(i, g.imgs.length - 1));
-        renderG(id);
+        document.getElementById("sl" + id).style.transform =
+          `translateX(-${g.cur * 100}%)`;
+        document
+          .getElementById("dt" + id)
+          .querySelectorAll(".gdot")
+          .forEach((d, j) => d.classList.toggle("on", j === g.cur));
+        document.getElementById("cn" + id).textContent =
+          `${g.cur + 1} / ${g.imgs.length}`;
+        resetTimer(id);
       }
-      function next(id) {
+      function next(id, auto) {
         const g = G[id];
         if (!g || !g.imgs.length) return;
         g.cur = (g.cur + 1) % g.imgs.length;
-        renderG(id);
+        document.getElementById("sl" + id).style.transform =
+          `translateX(-${g.cur * 100}%)`;
+        document
+          .getElementById("dt" + id)
+          .querySelectorAll(".gdot")
+          .forEach((d, j) => d.classList.toggle("on", j === g.cur));
+        document.getElementById("cn" + id).textContent =
+          `${g.cur + 1} / ${g.imgs.length}`;
+        if (!auto) resetTimer(id);
       }
       function prev(id) {
         const g = G[id];
         if (!g || !g.imgs.length) return;
         g.cur = (g.cur - 1 + g.imgs.length) % g.imgs.length;
-        renderG(id);
+        document.getElementById("sl" + id).style.transform =
+          `translateX(-${g.cur * 100}%)`;
+        document
+          .getElementById("dt" + id)
+          .querySelectorAll(".gdot")
+          .forEach((d, j) => d.classList.toggle("on", j === g.cur));
+        document.getElementById("cn" + id).textContent =
+          `${g.cur + 1} / ${g.imgs.length}`;
+        resetTimer(id);
       }
 
       [0, 1, 2, 3].forEach((i) => initG(i));
+
+      /* ── LIGHTBOX — strip ── */
+      let lbCurrentProject = null;
+      let lbZoomIndex = 0;
+
+      function openLightbox(id) {
+        lbCurrentProject = id;
+        const imgs = projectImages[id] || [];
+        const strip = document.getElementById("lb-strip");
+        document.getElementById("lb-title").innerHTML =
+          `Screenshots — <span>${projectTitles[id]}</span>`;
+        strip.innerHTML = imgs
+          .map(
+            (src, i) =>
+              `<div class="lb-strip-item" onclick="openZoom(${id},${i})">
+            <img src="${src}" alt="Screenshot ${i + 1}" loading="lazy"/>
+            <div class="lb-strip-num">${i + 1} / ${imgs.length}</div>
+          </div>`,
+          )
+          .join("");
+        strip.scrollLeft = 0;
+        document.getElementById("lightbox").classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeLightbox() {
+        document.getElementById("lightbox").classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      function stripScroll(dir) {
+        const strip = document.getElementById("lb-strip");
+        const itemW = strip.querySelector(".lb-strip-item")?.offsetWidth || 400;
+        strip.scrollBy({ left: dir * (itemW + 16), behavior: "smooth" });
+      }
+
+      function openZoom(id, index) {
+        lbCurrentProject = id;
+        lbZoomIndex = index;
+        const imgs = projectImages[id] || [];
+        document.getElementById("lb-zoom-img").src = imgs[index];
+        document.getElementById("lb-zoom-counter").textContent =
+          `${index + 1} / ${imgs.length}`;
+        document.getElementById("lb-zoom").classList.add("open");
+      }
+
+      function closeZoom() {
+        document.getElementById("lb-zoom").classList.remove("open");
+      }
+
+      function zoomNav(dir) {
+        const imgs = projectImages[lbCurrentProject] || [];
+        lbZoomIndex = (lbZoomIndex + dir + imgs.length) % imgs.length;
+        document.getElementById("lb-zoom-img").src = imgs[lbZoomIndex];
+        document.getElementById("lb-zoom-counter").textContent =
+          `${lbZoomIndex + 1} / ${imgs.length}`;
+      }
+
+      document
+        .getElementById("lightbox")
+        .addEventListener("click", function (e) {
+          if (e.target === this) closeLightbox();
+        });
+      document
+        .getElementById("lb-zoom")
+        .addEventListener("click", function (e) {
+          if (e.target === this) closeZoom();
+        });
+      document.addEventListener("keydown", function (e) {
+        if (document.getElementById("lb-zoom").classList.contains("open")) {
+          if (e.key === "ArrowRight") zoomNav(1);
+          if (e.key === "ArrowLeft") zoomNav(-1);
+          if (e.key === "Escape") closeZoom();
+        } else if (
+          document.getElementById("lightbox").classList.contains("open")
+        ) {
+          if (e.key === "ArrowRight") stripScroll(1);
+          if (e.key === "ArrowLeft") stripScroll(-1);
+          if (e.key === "Escape") closeLightbox();
+        }
+      });
     </script>
   </body>
 </html>
