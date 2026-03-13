@@ -1872,18 +1872,13 @@
           return;
         }
         gal.classList.remove("no-imgs");
-        /* On mobile: render only the first image. On desktop: render all */
-        var imgList = isMobile() ? [g.imgs[0]] : g.imgs;
-        var html = "";
-        for (var i = 0; i < imgList.length; i++) {
-          html +=
-            '<div class="gslide"><img src="' +
-            imgList[i] +
-            '" alt="screenshot ' +
-            (i + 0) +
-            '" loading="eager" decoding="sync"/></div>';
-        }
-
+           if (isMobile()) {
+          /* Mobile: single static image, eager load, no slideshow machinery */
+          sl.innerHTML = '<div class="gslide"><img src="' + g.imgs[0] + '" alt="screenshot 1" loading="eager" decoding="sync"/></div>';
+          sl.style.transform = "translateX(0%)";
+          dt.innerHTML = "";
+          cn.style.display = "none";
+        } else {}
         sl.style.transform = "translateX(0%)";
         /* Dots and counter only on desktop */
         if (isMobile()) {
