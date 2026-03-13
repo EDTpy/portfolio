@@ -8,6 +8,7 @@
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
+
     <style>
       [data-theme="dark"] {
         --bg: #0b0b0b;
@@ -1804,6 +1805,23 @@
     </div>
 
     <script>
+      /* SYSTEM THEME DETECTION */
+      (function () {
+        try {
+          // Check if user has a saved preference
+          var savedTheme = localStorage.getItem("pt");
+
+          if (!savedTheme) {
+            // No saved preference, check system preference
+            var systemPrefersDark = window.matchMedia(
+              "(prefers-color-scheme: dark)",
+            ).matches;
+            var systemTheme = systemPrefersDark ? "dark" : "light";
+            document.documentElement.setAttribute("data-theme", systemTheme);
+          }
+        } catch (e) {}
+      })();
+
       /* THEME */
       function toggleTheme() {
         var h = document.documentElement;
