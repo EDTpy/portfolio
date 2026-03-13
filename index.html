@@ -326,7 +326,7 @@
       .hero-name .ghost {
         display: block;
         color: transparent;
-        -webkit-text-stroke: 1.5px var(--hero-stroke);
+        -webkit-text-stroke: 1.5px var(--accent);
       }
       .hero-name .o {
         color: var(--accent);
@@ -687,52 +687,40 @@
       .gallery {
         position: relative;
         width: 100%;
-        aspect-ratio: 16/9;
-        background: var(--img-placeholder);
+        height: 240px;
+        background: #000;
         overflow: hidden;
         flex-shrink: 0;
       }
       [data-theme="light"] .gallery {
         border-radius: 12px 12px 0 0;
       }
+      .gallery.no-imgs {
+        display: none;
+      }
       .gslides {
         display: flex;
         height: 100%;
         transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform;
       }
       .gslide {
         min-width: 100%;
         height: 100%;
         flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #000;
       }
       .gslide img {
         width: 100%;
         height: 100%;
         object-fit: contain;
         display: block;
-        background: var(--img-placeholder);
-      }
-      .gplaceholder {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 0.75rem;
-      }
-      .gplaceholder svg {
-        opacity: 0.15;
-        width: 32px;
-        height: 32px;
-        color: var(--accent);
-      }
-      .gplaceholder-txt {
-        font-family: "DM Mono", monospace;
-        font-size: 0.6rem;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: var(--tx-muted);
+        background: #000;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
       }
       .garrow {
         position: absolute;
@@ -826,6 +814,11 @@
         background: var(--accent);
         border-color: var(--accent);
       }
+      @media (max-width: 600px) {
+        .gallery {
+          height: 200px;
+        }
+      }
 
       /* CARD BODY */
       .pcard-body {
@@ -911,7 +904,7 @@
         animation: pip 1.6s infinite;
       }
 
-      /* LIGHTBOX — scrollable strip */
+      /* LIGHTBOX */
       .lightbox {
         display: none;
         position: fixed;
@@ -983,6 +976,7 @@
         align-items: center;
         scrollbar-width: thin;
         scrollbar-color: var(--accent) rgba(255, 255, 255, 0.05);
+        -webkit-overflow-scrolling: touch;
       }
       .lb-strip::-webkit-scrollbar {
         height: 4px;
@@ -998,7 +992,7 @@
       .lb-strip-item {
         flex-shrink: 0;
         scroll-snap-align: center;
-        height: clamp(180px, 52vh, 500px);
+        height: clamp(160px, 50vh, 480px);
         aspect-ratio: 16/9;
         border-radius: 10px;
         overflow: hidden;
@@ -1019,6 +1013,8 @@
         object-fit: contain;
         display: block;
         background: #000;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
       }
       .lb-strip-num {
         position: absolute;
@@ -1091,6 +1087,8 @@
         max-height: 92vh;
         object-fit: contain;
         border-radius: 4px;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
       }
       .lb-zoom-close {
         position: absolute;
@@ -1332,44 +1330,16 @@
         }
       }
 
-      /* iOS SAFARI FIXES */
+      /* iOS SAFARI */
       @supports (-webkit-touch-callout: none) {
         #hero {
           min-height: -webkit-fill-available;
           padding-top: 5.5rem;
           padding-bottom: 3rem;
         }
-        .gallery {
-          aspect-ratio: unset;
-          height: 220px;
-        }
-        .gslide img {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-          background: var(--img-placeholder);
-          -webkit-transform: translateZ(0);
-          transform: translateZ(0);
-        }
-        .lb-strip {
-          -webkit-overflow-scrolling: touch;
-        }
-        .lb-strip-item {
-          height: 170px;
-          -webkit-transform: translateZ(0);
-          transform: translateZ(0);
-        }
-        .lb-strip-item img {
-          object-fit: contain;
-          background: #000;
-          -webkit-transform: translateZ(0);
-          transform: translateZ(0);
-        }
         .lb-zoom img {
           max-width: 100vw;
           max-height: 80vh;
-          -webkit-transform: translateZ(0);
-          transform: translateZ(0);
         }
       }
     </style>
@@ -1386,8 +1356,8 @@
         </ul>
         <div class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
           <div class="t-knob"></div>
-          <span class="t-icon t-sun">☀️</span>
-          <span class="t-icon t-moon">🌙</span>
+          <span class="t-icon t-sun">&#9728;&#65039;</span>
+          <span class="t-icon t-moon">&#127769;</span>
         </div>
         <a href="mailto:damilareogunkanmi19@gmail.com" class="nav-hire"
           >Hire Me</a
@@ -1405,11 +1375,13 @@
       <div class="hero-pip-row">
         <div class="hero-pip"></div>
         <span class="hero-pip-text"
-          >Open to Work &nbsp;·&nbsp; Lagos, Nigeria</span
+          >Open to Work &nbsp;&middot;&nbsp; Lagos, Nigeria</span
         >
       </div>
       <h1 class="hero-name">
-        Ogunkanmi<br /><span class="ghost">Taiwo <span class="o">—</span></span>
+        Ogunkanmi<br /><span class="ghost"
+          >Taiwo <span class="o">&mdash;</span></span
+        >
       </h1>
       <div class="hero-sub">
         <div class="hero-rule"></div>
@@ -1418,9 +1390,9 @@
         </p>
       </div>
       <p class="hero-desc">
-        I build systems that solve real problems — from enterprise ERPs and
-        transit schedulers to AI-powered prediction engines. Clean code. Sharp
-        thinking. Ready to ship.
+        I build systems that solve real problems &mdash; from enterprise ERPs
+        and transit schedulers to AI-powered prediction engines. Clean code.
+        Sharp thinking. Ready to ship.
       </p>
       <div class="hero-cta">
         <a href="#projects" class="btn-fill">View My Work</a>
@@ -1430,7 +1402,9 @@
       </div>
       <div class="hero-floater">
         <div class="hf-row">Role <em>Software Engineer</em></div>
-        <div class="hf-row">Location <em>Lagos, Nigeria 🇳🇬</em></div>
+        <div class="hf-row">
+          Location <em>Lagos, Nigeria &#127469;&#127468;</em>
+        </div>
         <div class="hf-row">
           <span class="live-pip"></span>Status <em>Available</em>
         </div>
@@ -1451,14 +1425,14 @@
           <p>
             I'm <strong>Ogunkanmi Taiwo</strong>, a Software Engineer based in
             Lagos, passionate about crafting software that makes a tangible
-            difference — from automating workflows to designing systems that
-            serve real users at scale.
+            difference &mdash; from automating workflows to designing systems
+            that serve real users at scale.
           </p>
           <p>
             My work spans enterprise platforms, data-driven applications,
             desktop tools, and intelligent automation. I'm always building,
-            always learning — currently deep in the architecture of a full ERP
-            system while sharpening my full stack expertise.
+            always learning &mdash; currently deep in the architecture of a full
+            ERP system while sharpening my full stack expertise.
           </p>
           <p>
             I thrive at the intersection of
@@ -1502,7 +1476,7 @@
             <div class="stat-lbl">Active Build</div>
           </div>
           <div class="stat-box">
-            <div class="stat-num">∞</div>
+            <div class="stat-num">&#8734;</div>
             <div class="stat-lbl">Drive to Learn</div>
           </div>
         </div>
@@ -1515,7 +1489,7 @@
         <span class="s-tag">02 &nbsp; Projects</span>
         <div class="s-rule"></div>
       </div>
-      <h2 class="s-title reveal">Selected Work</h2>
+      <h2 class="s-title reveal">Works to View</h2>
       <div class="proj-grid">
         <div class="pcard reveal d1">
           <div class="pcard-stripe"></div>
@@ -1535,12 +1509,12 @@
             </div>
           </div>
           <div class="pcard-body">
-            <div class="pcard-num">Project — 01</div>
+            <div class="pcard-num">Project &mdash; 01</div>
             <div class="pcard-title">RS-Abimbola ERP System</div>
             <p class="pcard-desc">
               A comprehensive Enterprise Resource Planning and Fleet Management
               system in active development. Covers inventory, finance, HR, and
-              reporting modules — built for real business complexity.
+              reporting modules &mdash; built for real business complexity.
             </p>
             <div class="ptags">
               <span class="ptag">ERP</span><span class="ptag">Full Stack</span
@@ -1573,7 +1547,7 @@
             </div>
           </div>
           <div class="pcard-body">
-            <div class="pcard-num">Project — 02</div>
+            <div class="pcard-num">Project &mdash; 02</div>
             <div class="pcard-title">EDT Bet Prediction &amp; Analysis App</div>
             <p class="pcard-desc">
               An intelligent sports betting prediction platform. Uses data
@@ -1613,7 +1587,7 @@
             </div>
           </div>
           <div class="pcard-body">
-            <div class="pcard-num">Project — 03</div>
+            <div class="pcard-num">Project &mdash; 03</div>
             <div class="pcard-title">Danfo Bus Scheduling System</div>
             <p class="pcard-desc">
               A transit management system built for Nigeria's public transport
@@ -1652,7 +1626,7 @@
             </div>
           </div>
           <div class="pcard-body">
-            <div class="pcard-num">Project — 04</div>
+            <div class="pcard-num">Project &mdash; 04</div>
             <div class="pcard-title">CGPA Calculator</div>
             <p class="pcard-desc">
               A Java desktop app for Nigerian university students. Supports
@@ -1685,9 +1659,9 @@
           Let's build<br />something great together.
         </h2>
         <p class="reveal d1">
-          I'm actively looking for opportunities — full-time roles, internship
-          opportunities, freelance, gigs, or exciting collaborations. If you're
-          building something meaningful, I want to hear about it.
+          I'm actively looking for opportunities &mdash; full-time roles,
+          internship opportunities, freelance, gigs, or exciting collaborations.
+          If you're building something meaningful, I want to hear about it.
         </p>
         <div class="contact-email-block reveal d2">
           <a href="mailto:damilareogunkanmi19@gmail.com" class="contact-email"
@@ -1718,15 +1692,15 @@
     <!-- FOOTER -->
     <footer>
       <div class="ft-badge">Open to Work</div>
-      <span class="ft">Software Engineer · Lagos, Nigeria</span>
-      <span class="ft">© 2026 Ogunkanmi Taiwo</span>
+      <span class="ft">Software Engineer &middot; Lagos, Nigeria</span>
+      <span class="ft">&copy; 2026 Ogunkanmi Taiwo</span>
     </footer>
 
     <!-- LIGHTBOX -->
     <div class="lightbox" id="lightbox">
       <div class="lb-header">
         <div class="lb-title" id="lb-title">Project Screenshots</div>
-        <button class="lb-close" onclick="closeLightbox()">✕</button>
+        <button class="lb-close" onclick="closeLightbox()">&#10005;</button>
       </div>
       <div class="lb-strip-wrap">
         <button class="lb-strip-nav lb-strip-left" onclick="stripScroll(-1)">
@@ -1738,13 +1712,13 @@
         </button>
       </div>
       <div class="lb-counter-bar">
-        Scroll or swipe to browse &nbsp;·&nbsp; Click any image to zoom
+        Scroll or swipe to browse &nbsp;&middot;&nbsp; Click any image to zoom
       </div>
     </div>
 
     <!-- ZOOM -->
     <div class="lb-zoom" id="lb-zoom">
-      <button class="lb-zoom-close" onclick="closeZoom()">✕</button>
+      <button class="lb-zoom-close" onclick="closeZoom()">&#10005;</button>
       <button class="lb-zoom-nav lb-zoom-prev" onclick="zoomNav(-1)">
         &#8249;
       </button>
@@ -1758,22 +1732,22 @@
     <script>
       /* THEME */
       function toggleTheme() {
-        const h = document.documentElement;
-        const n = h.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        var h = document.documentElement;
+        var n = h.getAttribute("data-theme") === "dark" ? "light" : "dark";
         h.setAttribute("data-theme", n);
         try {
           localStorage.setItem("pt", n);
         } catch (e) {}
       }
       try {
-        const s = localStorage.getItem("pt");
+        var s = localStorage.getItem("pt");
         if (s) document.documentElement.setAttribute("data-theme", s);
       } catch (e) {}
 
       /* SCROLL REVEAL */
-      const obs = new IntersectionObserver(
-        (es) => {
-          es.forEach((e) => {
+      var obs = new IntersectionObserver(
+        function (es) {
+          es.forEach(function (e) {
             if (e.isIntersecting) {
               e.target.classList.add("visible");
               obs.unobserve(e.target);
@@ -1782,30 +1756,25 @@
         },
         { threshold: 0.08 },
       );
-      document.querySelectorAll(".reveal").forEach((el) => obs.observe(el));
+      document.querySelectorAll(".reveal").forEach(function (el) {
+        obs.observe(el);
+      });
 
-      /* ══════════════════════════════════════
-               GALLERY — ADD YOUR IMAGES HERE
-               0 = RS-Abimbola ERP
-               1 = EDT Bet Prediction
-               2 = Danfo Bus Scheduling
-               3 = CGPA Calculator
-            ══════════════════════════════════════ */
-      const projectImages = {
+      /* IMAGE PATHS — all your images */
+      var projectImages = {
         0: [
-           './Images/erp/screenshot1.png',
-          './Images/erp/screenshot2.png',
-          './Images/erp/screenshot3.png',
-          './Images/erp/screenshot4.png',
-          './Images/erp/screenshot5.png',
-          './Images/erp/screenshot6.png',
-          './Images/erp/screenshot7.png',
-          './Images/erp/screenshot8.png',
-          './Images/erp/screenshot9.png',
-          './Images/erp/screenshot10.png',
-          ' ./Images/erp/screenshot11.png',
-          './Images/erp/screenshot12.png',
-          
+          "./Images/erp/screenshot1.png",
+          "./Images/erp/screenshot2.png",
+          "./Images/erp/screenshot3.png",
+          "./Images/erp/screenshot4.png",
+          "./Images/erp/screenshot5.png",
+          "./Images/erp/screenshot6.png",
+          "./Images/erp/screenshot7.png",
+          "./Images/erp/screenshot8.png",
+          "./Images/erp/screenshot9.png",
+          "./Images/erp/screenshot10.png",
+          "./Images/erp/screenshot11.png",
+          "./Images/erp/screenshot12.png",
         ],
         1: [
           "./Images/edt/screenshot1.png",
@@ -1833,7 +1802,7 @@
         ],
       };
 
-      const projectTitles = {
+      var projectTitles = {
         0: "RS-Abimbola ERP System",
         1: "EDT Bet Prediction App",
         2: "Danfo Bus Scheduling System",
@@ -1841,8 +1810,8 @@
       };
 
       /* GALLERY ENGINE */
-      const G = {};
-      const timers = {};
+      var G = {};
+      var timers = {};
 
       function initG(id) {
         G[id] = { imgs: projectImages[id] || [], cur: 0 };
@@ -1851,102 +1820,134 @@
       }
       function startTimer(id) {
         clearInterval(timers[id]);
-        timers[id] = setInterval(() => {
+        timers[id] = setInterval(function () {
           next(id, true);
-        }, 5000);
+        }, 2000);
       }
       function resetTimer(id) {
         if (G[id] && G[id].imgs.length > 1) startTimer(id);
       }
       function renderG(id) {
-        const g = G[id];
-        const sl = document.getElementById("sl" + id);
-        const dt = document.getElementById("dt" + id);
-        const cn = document.getElementById("cn" + id);
-        const va = document.getElementById("va" + id);
+        var g = G[id];
+        var sl = document.getElementById("sl" + id);
+        var dt = document.getElementById("dt" + id);
+        var cn = document.getElementById("cn" + id);
+        var va = document.getElementById("va" + id);
+        var gal = document.getElementById("g" + id);
         if (!g.imgs.length) {
-          sl.innerHTML = `<div class="gslide"><div class="gplaceholder"><svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v13.5A1.5 1.5 0 003.75 21z"/></svg><span class="gplaceholder-txt">Screenshots coming soon</span></div></div>`;
+          gal.classList.add("no-imgs");
           dt.innerHTML = "";
           cn.style.display = "none";
           va.style.display = "none";
           return;
         }
-        sl.innerHTML = g.imgs
-          .map(
-            (src, i) =>
-              `<div class="gslide"><img src="${src}" alt="Screenshot ${i + 1}" loading="lazy"/></div>`,
-          )
-          .join("");
-        sl.style.transform = `translateX(-${g.cur * 100}%)`;
-        dt.innerHTML = g.imgs
-          .map(
-            (_, i) =>
-              `<div class="gdot${i === g.cur ? " on" : ""}" onclick="goTo(${id},${i})"></div>`,
-          )
-          .join("");
-        cn.textContent = `${g.cur + 1} / ${g.imgs.length}`;
+        gal.classList.remove("no-imgs");
+        var html = "";
+        for (var i = 0; i < g.imgs.length; i++) {
+          html +=
+            '<div class="gslide"><img src="' +
+            g.imgs[i] +
+            '" alt="Screenshot ' +
+            (i + 1) +
+            '" loading="lazy"/></div>';
+        }
+        sl.innerHTML = html;
+        sl.style.transform = "translateX(-" + g.cur * 100 + "%)";
+        var dots = "";
+        for (var j = 0; j < g.imgs.length; j++) {
+          dots +=
+            '<div class="gdot' +
+            (j === g.cur ? " on" : "") +
+            '" onclick="goTo(' +
+            id +
+            "," +
+            j +
+            ')"></div>';
+        }
+        dt.innerHTML = dots;
+        cn.textContent = g.cur + 1 + " / " + g.imgs.length;
         cn.style.display = g.imgs.length > 1 ? "block" : "none";
         va.style.display = "block";
       }
       function goTo(id, i) {
-        const g = G[id];
+        var g = G[id];
         g.cur = Math.max(0, Math.min(i, g.imgs.length - 1));
         document.getElementById("sl" + id).style.transform =
-          `translateX(-${g.cur * 100}%)`;
+          "translateX(-" + g.cur * 100 + "%)";
         document
           .getElementById("dt" + id)
           .querySelectorAll(".gdot")
-          .forEach((d, j) => d.classList.toggle("on", j === g.cur));
+          .forEach(function (d, j) {
+            d.classList.toggle("on", j === g.cur);
+          });
         document.getElementById("cn" + id).textContent =
-          `${g.cur + 1} / ${g.imgs.length}`;
+          g.cur + 1 + " / " + g.imgs.length;
         resetTimer(id);
       }
       function next(id, auto) {
-        const g = G[id];
+        var g = G[id];
         if (!g || !g.imgs.length) return;
         g.cur = (g.cur + 1) % g.imgs.length;
         document.getElementById("sl" + id).style.transform =
-          `translateX(-${g.cur * 100}%)`;
+          "translateX(-" + g.cur * 100 + "%)";
         document
           .getElementById("dt" + id)
           .querySelectorAll(".gdot")
-          .forEach((d, j) => d.classList.toggle("on", j === g.cur));
+          .forEach(function (d, j) {
+            d.classList.toggle("on", j === g.cur);
+          });
         document.getElementById("cn" + id).textContent =
-          `${g.cur + 1} / ${g.imgs.length}`;
+          g.cur + 1 + " / " + g.imgs.length;
         if (!auto) resetTimer(id);
       }
       function prev(id) {
-        const g = G[id];
+        var g = G[id];
         if (!g || !g.imgs.length) return;
         g.cur = (g.cur - 1 + g.imgs.length) % g.imgs.length;
         document.getElementById("sl" + id).style.transform =
-          `translateX(-${g.cur * 100}%)`;
+          "translateX(-" + g.cur * 100 + "%)";
         document
           .getElementById("dt" + id)
           .querySelectorAll(".gdot")
-          .forEach((d, j) => d.classList.toggle("on", j === g.cur));
+          .forEach(function (d, j) {
+            d.classList.toggle("on", j === g.cur);
+          });
         document.getElementById("cn" + id).textContent =
-          `${g.cur + 1} / ${g.imgs.length}`;
+          g.cur + 1 + " / " + g.imgs.length;
         resetTimer(id);
       }
-      [0, 1, 2, 3].forEach((i) => initG(i));
+      [0, 1, 2, 3].forEach(function (i) {
+        initG(i);
+      });
 
       /* LIGHTBOX */
-      let lbCurrentProject = null;
-      let lbZoomIndex = 0;
+      var lbCurrentProject = null;
+      var lbZoomIndex = 0;
 
       function openLightbox(id) {
         lbCurrentProject = id;
-        const imgs = projectImages[id] || [];
-        const strip = document.getElementById("lb-strip");
+        var imgs = projectImages[id] || [];
+        var strip = document.getElementById("lb-strip");
         document.getElementById("lb-title").innerHTML =
-          `Screenshots — <span>${projectTitles[id]}</span>`;
-        strip.innerHTML = imgs
-          .map(
-            (src, i) =>
-              `<div class="lb-strip-item" onclick="openZoom(${id},${i})"><img src="${src}" alt="Screenshot ${i + 1}" loading="lazy"/><div class="lb-strip-num">${i + 1} / ${imgs.length}</div></div>`,
-          )
-          .join("");
+          "Screenshots &mdash; <span>" + projectTitles[id] + "</span>";
+        var html = "";
+        for (var i = 0; i < imgs.length; i++) {
+          html +=
+            '<div class="lb-strip-item" onclick="openZoom(' +
+            id +
+            "," +
+            i +
+            ')"><img src="' +
+            imgs[i] +
+            '" alt="Screenshot ' +
+            (i + 1) +
+            '" loading="lazy"/><div class="lb-strip-num">' +
+            (i + 1) +
+            " / " +
+            imgs.length +
+            "</div></div>";
+        }
+        strip.innerHTML = html;
         strip.scrollLeft = 0;
         document.getElementById("lightbox").classList.add("open");
         document.body.style.overflow = "hidden";
@@ -1956,29 +1957,31 @@
         document.body.style.overflow = "";
       }
       function stripScroll(dir) {
-        const strip = document.getElementById("lb-strip");
-        const itemW = strip.querySelector(".lb-strip-item")?.offsetWidth || 400;
+        var strip = document.getElementById("lb-strip");
+        var item = strip.querySelector(".lb-strip-item");
+        var itemW = item ? item.offsetWidth : 400;
         strip.scrollBy({ left: dir * (itemW + 16), behavior: "smooth" });
       }
       function openZoom(id, index) {
         lbCurrentProject = id;
         lbZoomIndex = index;
-        const imgs = projectImages[id] || [];
+        var imgs = projectImages[id] || [];
         document.getElementById("lb-zoom-img").src = imgs[index];
         document.getElementById("lb-zoom-counter").textContent =
-          `${index + 1} / ${imgs.length}`;
+          index + 1 + " / " + imgs.length;
         document.getElementById("lb-zoom").classList.add("open");
       }
       function closeZoom() {
         document.getElementById("lb-zoom").classList.remove("open");
       }
       function zoomNav(dir) {
-        const imgs = projectImages[lbCurrentProject] || [];
+        var imgs = projectImages[lbCurrentProject] || [];
         lbZoomIndex = (lbZoomIndex + dir + imgs.length) % imgs.length;
         document.getElementById("lb-zoom-img").src = imgs[lbZoomIndex];
         document.getElementById("lb-zoom-counter").textContent =
-          `${lbZoomIndex + 1} / ${imgs.length}`;
+          lbZoomIndex + 1 + " / " + imgs.length;
       }
+
       document
         .getElementById("lightbox")
         .addEventListener("click", function (e) {
